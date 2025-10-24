@@ -10,14 +10,12 @@ class CustomerSeeder extends Seeder
 {
     public function run(): void
     {
-        // Only managers & sales reps can own records
-        $ownerIds = User::query()
-            ->whereIn('role', [User::ROLE_MANAGER, User::ROLE_SALES_REP])
-            ->pluck('id');
+        // Only SALES_REP can be owner of a Customer
+        $salesRepIds = User::where('role', User::ROLE_SALES_REP)->pluck('id');
 
         Customer::factory()
             ->count(20)
-            ->state(fn () => ['owner_id' => $ownerIds->random()])
+            ->state(fn () => ['owner_id' => $salesRepIds->random()])
             ->create();
     }
 }

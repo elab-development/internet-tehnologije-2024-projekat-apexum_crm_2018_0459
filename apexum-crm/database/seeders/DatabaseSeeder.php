@@ -10,9 +10,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            CustomerSeeder::class,
-            OpportunitySeeder::class,
-            ActivitySeeder::class,
+            CustomerSeeder::class,     // customers owned only by sales reps
+            OpportunitySeeder::class, // opportunities owned only by sales reps
+            ActivitySeeder::class,    // activities owned by reps or managers
         ]);
     }
 }
