@@ -42,7 +42,7 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id')->index();   // FK -> customers.id
-            $table->unsignedBigInteger('opportunity_id')->index(); // FK -> opportunities.id (nullable later)
+            $table->unsignedBigInteger('opportunity_id')->nullable()->index(); // FK -> opportunities.id (nullable later)
             $table->unsignedBigInteger('owner_id')->index();      // FK -> users.id
             $table->enum('type', ['call','email','meeting','task'])->default('task');
             $table->enum('status', ['open','completed','cancelled'])->default('open');
