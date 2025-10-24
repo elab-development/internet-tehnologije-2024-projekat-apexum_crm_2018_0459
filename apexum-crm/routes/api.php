@@ -8,12 +8,15 @@ use App\Http\Controllers\MyCustomersController;
 use App\Http\Controllers\OpportunityController as SalesOppController;
 use App\Http\Controllers\ActivityController as SalesActController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\UserController;
 
 Route::post('/register', [AuthController::class, 'register']); // SK1
 Route::post('/login',    [AuthController::class, 'login']);    // SK2
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']); // SK3
+
+    Route::get('/users', [UserController::class, 'index']);
 
     // Admin
     Route::get('/admin/users',       [UserAdminController::class, 'index']);   // SK4
@@ -29,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Sales Rep
     Route::get('/sales/my-customers',               [MyCustomersController::class, 'index']);    // SK11
     Route::post('/sales/opportunities',             [SalesOppController::class, 'store']);       // SK12
-    Route::patch('/sales/opportunities/{id}',       [SalesOppController::class, 'update']);      // SK13
+    Route::put('/sales/opportunities/{id}',       [SalesOppController::class, 'update']);      // SK13
     Route::post('/sales/activities',                [SalesActController::class, 'store']);       // SK14
     Route::patch('/sales/activities/{id}/status',   [SalesActController::class, 'updateStatus']); // SK15
     Route::get('/export/customers/{id}/pdf', [ExportController::class, 'exportCustomerPdf']); // SK16 (PDF)
