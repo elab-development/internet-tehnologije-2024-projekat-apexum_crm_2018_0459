@@ -1,40 +1,68 @@
 <?php
-// app/Models/Opportunity.php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Opportunity extends Model
 {
     use HasFactory;
 
-    // Salesforce-like stages
-    public const STAGE_PROSPECTING   = 'Prospecting';
-    public const STAGE_QUALIFICATION = 'Qualification';
-    public const STAGE_PROPOSAL      = 'Proposal';
-    public const STAGE_NEGOTIATION   = 'Negotiation';
-    public const STAGE_CLOSED_WON    = 'Closed Won';
-    public const STAGE_CLOSED_LOST   = 'Closed Lost';
+    public const STAGE_PROSPECTING   = 'prospecting';
+    public const STAGE_QUALIFICATION = 'qualification';
+    public const STAGE_PROPOSAL      = 'proposal';
+    public const STAGE_WON           = 'won';
+    public const STAGE_LOST          = 'lost';
+
+    public const STAGES = [
+        self::STAGE_PROSPECTING,
+        self::STAGE_QUALIFICATION,
+        self::STAGE_PROPOSAL,
+        self::STAGE_WON,
+        self::STAGE_LOST,
+    ];
 
     protected $fillable = [
-        'account_id', 'contact_id', 'owner_id',
-        'name', 'amount', 'close_date', 'stage', 'probability', 'description',
+        'customer_id',
+        'owner_id',
+        'title',
+        'stage',
+        'amount',
+        'close_date',
+        'probability',
+        'source',
+        'description',
     ];
 
     protected $casts = [
-        'amount'      => 'decimal:2',
         'close_date'  => 'date',
+        'amount'      => 'decimal:2',
         'probability' => 'integer',
     ];
 
-    protected $appends = ['is_won', 'is_lost'];
+    public function setStageAttribute($value): void
+    {
+        $stage = strtolower($value);
+        if (! in_array($stage, self::STAGES, true)) {
+            throw new \InvalidArgumentException("Invalid stage: {$value}");
+        }
+        $this->attributes['stage'] = $stage;
+    }
 
-    public function owner()     { return $this->belongsTo(User::class, 'owner_id'); }
-    public function account()   { return $this->belongsTo(Account::class); }
-    public function contact()   { return $this->belongsTo(Contact::class); }
-    public function activities(){ return $this->morphMany(Activity::class, 'activityable'); }
+    // Relationships
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
-    public function getIsWonAttribute(): bool  { return $this->stage === self::STAGE_CLOSED_WON; }
-    public function getIsLostAttribute(): bool { return $this->stage === self::STAGE_CLOSED_LOST; }
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }
