@@ -1,6 +1,5 @@
 <?php
 
-// routes/api.php
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\CustomerController as ManagerCustomerController;
