@@ -35,7 +35,7 @@ export default function AdminHome() {
         <div className="adm-tiles">
           <article className="adm-tile">
             <div className="adm-tile-ico"><FiUsers /></div>
-            <h2 className="adm-tile-title">My Customers</h2>
+            <h2 className="adm-tile-title">User Management</h2>
             <p className="adm-tile-sub">
               See assigned accounts, track opportunities and activities,
               and keep deals warm.
