@@ -10,11 +10,11 @@ use App\Http\Controllers\ActivityController as SalesActController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\UserController;
 
-Route::post('/register', [AuthController::class, 'register']); // SK1
-Route::post('/login',    [AuthController::class, 'login']);    // SK2
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login',    [AuthController::class, 'login']);    
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']); // SK3
+    Route::post('/logout', [AuthController::class, 'logout']); 
 
     Route::get('/users', [UserController::class, 'index']);
 
