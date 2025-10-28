@@ -20,7 +20,7 @@ export default function AdminHome() {
 
           <Link to="/admin/users" className="adm-cta-btn">
             <span className="adm-cta-ico"><FiUsers /></span>
-            <span>My Customers</span>
+            <span>User Management</span>
             <span className="adm-cta-arrow"><FiArrowRight /></span>
           </Link>
         </div>
@@ -41,7 +41,7 @@ export default function AdminHome() {
               and keep deals warm.
             </p>
             <Link to="/admin/users" className="adm-tile-link">
-              Open My Customers →
+              Open User Management →
             </Link>
           </article>
         </div>
