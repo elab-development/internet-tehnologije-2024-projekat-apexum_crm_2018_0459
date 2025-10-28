@@ -19,21 +19,21 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
 
     // Admin
-    Route::get('/admin/users',       [UserAdminController::class, 'index']);   // SK4
-    Route::delete('/admin/users/{id}',[UserAdminController::class, 'destroy']); // SK5
+    Route::get('/admin/users',       [UserAdminController::class, 'index']);   
+    Route::delete('/admin/users/{id}',[UserAdminController::class, 'destroy']); 
 
     // Manager
-    Route::post('/manager/customers',                   [ManagerCustomerController::class, 'store']);         // SK6
-    Route::patch('/manager/customers/{id}/ownership',   [ManagerCustomerController::class, 'patchOwnership']); // SK7
-    Route::get('/manager/customers',                    [ManagerCustomerController::class, 'index']);         // SK8
-    Route::get('/manager/customers/{id}',               [ManagerCustomerController::class, 'show']);          // SK9
-    Route::get('/manager/metrics',                      [ManagerCustomerController::class, 'metrics']);       // SK10
+    Route::post('/manager/customers',                   [ManagerCustomerController::class, 'store']);        
+    Route::patch('/manager/customers/{id}/ownership',   [ManagerCustomerController::class, 'patchOwnership']); 
+    Route::get('/manager/customers',                    [ManagerCustomerController::class, 'index']);         
+    Route::get('/manager/customers/{id}',               [ManagerCustomerController::class, 'show']);         
+    Route::get('/manager/metrics',                      [ManagerCustomerController::class, 'metrics']);       
 
     // Sales Rep
-    Route::get('/sales/my-customers',               [MyCustomersController::class, 'index']);    // SK11
-    Route::post('/sales/opportunities',             [SalesOppController::class, 'store']);       // SK12
-    Route::put('/sales/opportunities/{id}',       [SalesOppController::class, 'update']);      // SK13
-    Route::post('/sales/activities',                [SalesActController::class, 'store']);       // SK14
-    Route::patch('/sales/activities/{id}/status',   [SalesActController::class, 'updateStatus']); // SK15
-    Route::get('/export/customers/{id}/pdf', [ExportController::class, 'exportCustomerPdf']); // SK16 (PDF)
+    Route::get('/sales/my-customers',               [MyCustomersController::class, 'index']);    
+    Route::post('/sales/opportunities',             [SalesOppController::class, 'store']);       
+    Route::put('/sales/opportunities/{id}',       [SalesOppController::class, 'update']);      
+    Route::post('/sales/activities',                [SalesActController::class, 'store']);       
+    Route::patch('/sales/activities/{id}/status',   [SalesActController::class, 'updateStatus']); 
+    Route::get('/export/customers/{id}/pdf', [ExportController::class, 'exportCustomerPdf']); 
 });
