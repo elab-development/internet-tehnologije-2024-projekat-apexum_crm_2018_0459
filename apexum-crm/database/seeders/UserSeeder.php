@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
         User::factory()->admin()->create([
             'name'  => 'Apexum Admin',
             'email' => 'admin@apexumcrm.test',
+            'image_url' => 'https://www.it-akademija.com/cms/mestoZaUploadFajlove/Administrator_.jpg'
         ]);
 
         // Managers & Sales Reps
