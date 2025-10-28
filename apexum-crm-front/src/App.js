@@ -48,6 +48,7 @@ export default function App() {
 
       <Routes>
         <Route path="/auth" element={<Auth />} />
+        <Route path="*" element={<Auth />} />
         <Route
           path="/manager/home"
           element={hasToken ? <ManagerHome /> : <Navigate to="/auth" replace />}
